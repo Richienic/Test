@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Craftman Spa - Premium Wellness Experience</title>
+    <title>Luxury Spa | Craftman-inspired Design</title>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
         :root {
-            --primary: #2A2A2A;
-            --secondary: #3D3D3D;
-            --accent: #9067C6;
+            --primary: #0A0A0A;
+            --secondary: #1A1A1A;
+            --accent: #C4A87B;
             --text: #FFFFFF;
         }
 
@@ -21,26 +21,27 @@
         }
 
         body {
-            background: linear-gradient(45deg, #1a1a1a, #2d2d2d);
+            background-color: var(--primary);
             color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
         }
 
+        /* Navigation */
         .navbar {
             position: fixed;
             width: 100%;
             padding: 1.5rem 5%;
-            background: rgba(42, 42, 42, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
         }
 
         .logo {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--accent);
         }
@@ -53,86 +54,126 @@
         .nav-links a {
             color: var(--text);
             text-decoration: none;
-            transition: color 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
         }
 
-        .nav-links a:hover {
-            color: var(--accent);
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
         }
 
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
         .hero {
             height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: center;
-            text-align: center;
             padding: 0 5%;
+            position: relative;
+            overflow: hidden;
         }
 
         .hero-content {
-            max-width: 800px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         .hero h1 {
             font-size: 4rem;
             margin-bottom: 1.5rem;
-            background: linear-gradient(45deg, #9067C6, #C67AB8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 0.8s forwards;
         }
 
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 0.8s 0.2s forwards;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Services Grid */
         .services {
-            padding: 5rem 5%;
+            padding: 8rem 5%;
         }
 
-        .service-grid {
+        .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .service-card {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--secondary);
             padding: 2rem;
-            border-radius: 15px;
+            border-radius: 8px;
             transition: transform 0.3s ease;
-            backdrop-filter: blur(10px);
         }
 
         .service-card:hover {
             transform: translateY(-10px);
         }
 
-        .contact-section {
-            padding: 5rem 5%;
-            text-align: center;
+        /* Booking Form */
+        .booking-section {
+            padding: 8rem 5%;
+            background: var(--secondary);
         }
 
-        .contact-form {
+        .booking-form {
             max-width: 600px;
-            margin: 2rem auto;
+            margin: 0 auto;
         }
 
         .form-group {
             margin-bottom: 1.5rem;
         }
 
-        input, textarea {
+        input, select, textarea {
             width: 100%;
             padding: 1rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            border-radius: 8px;
+            background: var(--primary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             color: var(--text);
+            border-radius: 4px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--accent);
+            outline: none;
         }
 
         button {
             background: var(--accent);
-            color: var(--text);
+            color: var(--primary);
             padding: 1rem 2rem;
             border: none;
-            border-radius: 8px;
+            border-radius: 4px;
             cursor: pointer;
             transition: transform 0.3s ease;
         }
@@ -141,6 +182,7 @@
             transform: scale(1.05);
         }
 
+        /* Responsive Design */
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2.5rem;
@@ -154,83 +196,91 @@
 </head>
 <body>
     <nav class="navbar">
-        <div class="logo">Craftman Spa</div>
+        <div class="logo">Serenity Spa</div>
         <div class="nav-links">
             <a href="#home">Home</a>
             <a href="#services">Services</a>
+            <a href="#booking">Book</a>
             <a href="#contact">Contact</a>
         </div>
     </nav>
 
     <section class="hero" id="home">
         <div class="hero-content">
-            <h1 data-aos="fade-up">Premium Wellness Experience</h1>
-            <p data-aos="fade-up" data-aos-delay="200">Rejuvenate your body and mind with our exclusive treatments</p>
-            <button data-aos="fade-up" data-aos-delay="400" onclick="scrollToContact()">Book Consultation</button>
+            <h1>Modern Wellness<br>Experience</h1>
+            <p>Rejuvenate your senses with our curated spa treatments<br>crafted for modern lifestyles.</p>
+            <button onclick="scrollToBooking()">Book Consultation</button>
         </div>
     </section>
 
     <section class="services" id="services">
-        <h2 data-aos="fade-up">Our Services</h2>
-        <div class="service-grid">
+        <div class="services-grid">
             <div class="service-card" data-aos="fade-up">
-                <h3>Therapeutic Massage</h3>
-                <p>Professional deep tissue treatment for muscle relaxation</p>
-                <p>Duration: 60/90 mins</p>
+                <h3>Deep Tissue Therapy</h3>
+                <p>Targeted muscle relief using advanced techniques</p>
+                <p class="price">$150 / 90min</p>
+            </div>
+            <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                <h3>Aroma Detox</h3>
+                <p>Essential oil infused full-body detoxification</p>
+                <p class="price">$220 / 120min</p>
             </div>
             <div class="service-card" data-aos="fade-up" data-aos-delay="200">
-                <h3>Aromatherapy Session</h3>
-                <p>Essential oil treatments for complete mind-body harmony</p>
-                <p>Duration: 60/90 mins</p>
-            </div>
-            <div class="service-card" data-aos="fade-up" data-aos-delay="400">
-                <h3>Detox Package</h3>
-                <p>Full-body detoxification with herbal treatments</p>
-                <p>Duration: 120 mins</p>
+                <h3>Lymphatic Massage</h3>
+                <p>Specialized drainage treatment for optimal wellness</p>
+                <p class="price">$180 / 90min</p>
             </div>
         </div>
     </section>
 
-    <section class="contact-section" id="contact">
-        <h2 data-aos="fade-up">Book Your Session</h2>
-        <form class="contact-form" data-aos="fade-up">
-            <div class="form-group">
+    <section class="booking-section" id="booking">
+        <form class="booking-form">
+            <h2 data-aos="fade-up">Schedule Your Session</h2>
+            <div class="form-group" data-aos="fade-up">
                 <input type="text" placeholder="Full Name" required>
             </div>
-            <div class="form-group">
+            <div class="form-group" data-aos="fade-up">
                 <input type="email" placeholder="Email Address" required>
             </div>
-            <div class="form-group">
-                <input type="tel" placeholder="Phone Number" required>
+            <div class="form-group" data-aos="fade-up">
+                <select required>
+                    <option value="">Select Treatment</option>
+                    <option>Deep Tissue Therapy</option>
+                    <option>Aroma Detox</option>
+                    <option>Lymphatic Massage</option>
+                </select>
             </div>
-            <div class="form-group">
-                <textarea placeholder="Your Message" rows="5" required></textarea>
+            <div class="form-group" data-aos="fade-up">
+                <input type="date" required>
             </div>
-            <button type="submit">Send Request</button>
+            <div class="form-group" data-aos="fade-up">
+                <input type="time" required>
+            </div>
+            <button type="submit" data-aos="fade-up">Confirm Booking</button>
         </form>
     </section>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({
-            duration: 1000,
-            once: true
+            duration: 800,
+            once: true,
+            offset: 100
         });
 
-        function scrollToContact() {
-            document.querySelector('#contact').scrollIntoView({
+        function scrollToBooking() {
+            document.querySelector('#booking').scrollIntoView({
                 behavior: 'smooth'
             });
         }
 
-        // Smooth scroll for all navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(10, 10, 10, 0.98)';
+            } else {
+                navbar.style.background = 'rgba(10, 10, 10, 0.95)';
+            }
         });
     </script>
 </body>
